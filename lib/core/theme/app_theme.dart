@@ -5,12 +5,15 @@ class AppTheme {
   // Custom color
   static const Color customBlack = Color(0xFF1A2B2F);
   static const Color customSubtitleColor = Color(0xFF003B39);
+  static const Color customCyan1 = Color(0xFF88FFF9);
   static const Color customCyan2 = Color(0xFF21A39E);
   static const Color customGrey = Color(0xFF595959);
   static const Color customLightGrey = Color(0xFFE2E2E2);
   static const Color customWhite = Color(0xFFFFFFFF);
   static const Color customLightImage = Color(0xFFdee8e8);
   static const Color customDarkImage = Color(0xFFc8d7d7);
+  static const Color customParty = Color.fromARGB(255, 212, 240, 236);
+  static const Color customTimerBox = Color(0xFF1B8A85);
 
   static ThemeData get lightTheme {
     return ThemeData(

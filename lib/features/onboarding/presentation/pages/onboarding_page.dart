@@ -6,6 +6,7 @@ import '../widgets/onboarding_subtext.dart';
 import '../widgets/onboarding_progress_dots.dart';
 import '../widgets/onboarding_nav_button.dart';
 import '../widgets/onboarding_skip_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -72,85 +73,83 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
+        child: Column(
           children: [
-            Column(
-              children: [
-                const SizedBox(height: 16),
-                Expanded(
-                  child: PageView.builder(
-                    controller: _controller,
-                    itemCount: _pages.length,
-                    onPageChanged: _onPageChanged,
-                    itemBuilder: (context, index) {
-                      final page = _pages[index];
-                      return Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const SizedBox(
-                                  height: 160 + 236 + 32,
-                                ), // Space for image
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: page['headline'] as Widget,
-                                ),
-                                const SizedBox(height: 16),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: page['subtext'] as Widget,
-                                ),
-                              ],
-                            ),
-                          ),
-                          page['image'] as Widget,
-                        ],
-                      );
-                    },
-                  ),
+            // Skip button
+            Expanded(
+              flex: 2,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: OnboardingSkipButton(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => const SignUpPage()),
+                    );
+                  },
                 ),
-                const SizedBox(height: 32),
-              ],
+              ),
             ),
-            OnboardingSkipButton(
-              onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => const SignUpPage()),
-                );
-              },
+            SizedBox(height: ScreenUtil().screenHeight > 900 ? 48.h : 14.h),
+            // Image
+            Expanded(flex: 5, child: _pages[_currentPage]['image'] as Widget),
+            SizedBox(height: ScreenUtil().screenHeight > 900 ? 48.h : 24.h),
+            // Headline & Subtext (PageView for swiping)
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal:  24.w),
+                child: PageView.builder(
+                  controller: _controller,
+                  itemCount: _pages.length,
+                  onPageChanged: _onPageChanged,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final page = _pages[index];
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        page['headline'] as Widget,
+                        SizedBox(height: ScreenUtil().setHeight(16)),
+                        page['subtext'] as Widget,
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 100,
+            // Spacer(),
+            // Progress Dots
+            Expanded(
+              flex: 1,
               child: OnboardingProgressDots(
                 currentIndex: _currentPage,
                 count: _pages.length,
               ),
             ),
-            Positioned(
-              left: 24,
-              right: 24,
-              bottom: 24,
-              child: OnboardingNavButton(
-                onTap: _nextPage,
-                onBackTap: () {
-                  if (_currentPage > 0) {
-                    _controller.previousPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                  }
-                },
+            // SizedBox(height: ScreenUtil().screenHeight > 900 ? 48.h : 24.h),
+            // Navigation Buttons
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
+                child: OnboardingNavButton(
+                  onTap: _nextPage,
+                  onBackTap: () {
+                    if (_currentPage > 0) {
+                      _controller.previousPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
+                ),
               ),
             ),
+            
           ],
         ),
       ),
     );
   }
 }
-

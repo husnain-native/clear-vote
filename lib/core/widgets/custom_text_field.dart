@@ -1,6 +1,7 @@
 import 'package:clear_vote/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -53,10 +54,10 @@ class CustomTextField extends StatelessWidget {
           style: theme.textTheme.labelMedium?.copyWith(
             color: AppTheme.customGrey,
             fontWeight: FontWeight.w400,
-            fontSize: 14
+            fontSize: 14.sp.clamp(12, 20),
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 5.h),
         TextFormField(
           controller: controller,
           validator: validator,
@@ -76,6 +77,7 @@ class CustomTextField extends StatelessWidget {
             hintStyle: TextStyle(
               color: AppTheme.customLightGrey,
               fontWeight: FontWeight.w400,
+              fontSize: 14.sp.clamp(12, 20),
             ),
             prefixIcon: prefix,
             suffixIcon: suffix,
@@ -85,28 +87,28 @@ class CustomTextField extends StatelessWidget {
                     ? colorScheme.surface
                     : colorScheme.surface.withValues(alpha: 0.5),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide(color: AppTheme.customLightGrey),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide(color: AppTheme.customLightGrey),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide(color: AppTheme.customGrey, width: 1),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide(color: colorScheme.error),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide(color: colorScheme.error, width: 2),
             ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 12,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 10.h,
             ),
           ),
         ),

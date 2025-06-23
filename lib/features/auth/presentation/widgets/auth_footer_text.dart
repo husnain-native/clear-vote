@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:clear_vote/core/theme/app_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthFooterText extends StatelessWidget {
   final String text;
@@ -23,7 +24,7 @@ class AuthFooterText extends StatelessWidget {
             text,
             style: GoogleFonts.epilogue(
               fontWeight: FontWeight.w400,
-              fontSize: 14,
+              fontSize: 14.sp.clamp(12, 20),
               color: AppTheme.customBlack,
             ),
           ),
@@ -33,7 +34,7 @@ class AuthFooterText extends StatelessWidget {
               linkText,
               style: GoogleFonts.epilogue(
                 fontWeight: FontWeight.w600,
-                fontSize: 14,
+                fontSize: 14.sp.clamp(12, 20),
                 color: AppTheme.customCyan2,
                 // decoration: TextDecoration.underline,
               ),

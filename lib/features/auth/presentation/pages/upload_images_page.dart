@@ -1,3 +1,4 @@
+import 'package:clear_vote/features/auth/presentation/pages/candidate_voting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:clear_vote/core/theme/app_theme.dart';
@@ -5,6 +6,7 @@ import 'package:clear_vote/core/widgets/custom_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:clear_vote/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UploadImagesPage extends StatefulWidget {
   const UploadImagesPage({super.key});
@@ -32,58 +34,58 @@ class _UploadImagesPageState extends State<UploadImagesPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
                 Text(
                   'Upload Images',
                   style: GoogleFonts.epilogue(
                     fontWeight: FontWeight.w600,
-                    fontSize: 28,
+                    fontSize: 28.sp.clamp(18, 38),
                     color: AppTheme.customCyan2,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Text(
                   'Allowed List:',
                   style: GoogleFonts.epilogue(
                     fontWeight: FontWeight.w600,
-                    fontSize: 15,
+                    fontSize: 15.sp.clamp(10, 22),
                     color: AppTheme.customBlack,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(
                   '• ID Card\n• Driving License\n• Passport',
                   style: GoogleFonts.epilogue(
                     fontWeight: FontWeight.w400,
-                    fontSize: 15,
+                    fontSize: 15.sp.clamp(10, 22),
                     color: AppTheme.customBlack,
                   ),
                 ),
-                const SizedBox(height: 16),
-                // Outer container for shadow and padding
+                SizedBox(height: 16.h),
                 GestureDetector(
                   onTap: _pickImage,
                   child: Container(
-                    width: 355,
-                    height: 180,
-                    padding: const EdgeInsets.all(8),
+                    width: 355.w,
+                    height: 180.h,
+                    padding: EdgeInsets.all(8.w),
                     decoration: BoxDecoration(
                       color: AppTheme.customLightImage,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Center(
                       child: DashedBorderContainer(
-                        width: 188,
-                        height: 120,
+                        width: 188.w,
+                        height: 120.h,
+                        borderRadius: 12.r,
                         child: Container(
                           decoration: BoxDecoration(
                             color: AppTheme.customDarkImage,
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
                           child: Center(
                             child: Column(
@@ -91,15 +93,15 @@ class _UploadImagesPageState extends State<UploadImagesPage> {
                               children: [
                                 Icon(
                                   Icons.upload,
-                                  size: 36,
+                                  size: 36.w,
                                   color: AppTheme.customCyan2,
                                 ),
-                                const SizedBox(height: 8),
+                                SizedBox(height: 8.h),
                                 Text(
                                   'Click here to upload',
                                   style: GoogleFonts.epilogue(
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 14.46,
+                                    fontSize: 14.46.sp.clamp(10, 22),
                                     color: AppTheme.customGrey,
                                   ),
                                 ),
@@ -112,26 +114,26 @@ class _UploadImagesPageState extends State<UploadImagesPage> {
                   ),
                 ),
                 if (_selectedImage != null) ...[
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   DashedBorderContainer(
-                    borderRadius: 12,
-                    height: 60,
+                    borderRadius: 12.r,
+                    height: 60.h,
                     child: Padding(
-                      padding: const EdgeInsets.all(3.0),
+                      padding: EdgeInsets.all(3.0.w),
                       child: Row(
                         children: [
-                          const SizedBox(width: 12),
+                          SizedBox(width: 12.w),
                           Image.file(
                             _selectedImage!,
-                            width: 60,
-                            height: 60,
+                            width: 60.w,
+                            height: 60.w,
                             fit: BoxFit.cover,
                           ),
                           Text(
                             '  Selected Image',
                             style: GoogleFonts.epilogue(
                               fontWeight: FontWeight.w500,
-                              fontSize: 20,
+                              fontSize: 20.sp.clamp(12, 28),
                               color: AppTheme.customGrey,
                             ),
                           ),
@@ -140,30 +142,28 @@ class _UploadImagesPageState extends State<UploadImagesPage> {
                     ),
                   ),
                 ],
-                const SizedBox(height: 300),
-                CustomButton(
-                  text: 'Submit',
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => const DocumentsVerifiedPage(),
-                      ),
-                    );
-                    Future.delayed(const Duration(seconds: 2), () {
-                      if (mounted) {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (_) => const OnboardingPage(),
-                          ),
-                        );
-                      }
-                    });
-                  },
-                ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
               ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+        child: CustomButton(
+          text: 'Submit',
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const DocumentsVerifiedPage()),
+            );
+            Future.delayed(const Duration(seconds: 2), () {
+              if (mounted) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => const CandidateVotingPage()),
+                );
+              }
+            });
+          },
         ),
       ),
     );
@@ -182,26 +182,26 @@ class DocumentsVerifiedPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.verified, color: AppTheme.customCyan2, size: 100),
-              const SizedBox(height: 32),
+              Icon(Icons.verified, color: AppTheme.customCyan2, size: 100.w),
+              SizedBox(height: 32.h),
               Text(
                 'Documents Verified',
                 style: GoogleFonts.epilogue(
                   fontWeight: FontWeight.w600,
-                  fontSize: 34,
+                  fontSize: 34.sp.clamp(22, 40),
                   height: 1.0,
                   letterSpacing: 0,
                   color: AppTheme.customCyan2,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.h),
               Text(
                 'Your documents have been verified.\nYou will be redirected.',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: AppTheme.customGrey,
                   fontWeight: FontWeight.w400,
-                  fontSize: 15,
+                  fontSize: 15.sp.clamp(10, 22),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -251,7 +251,7 @@ class _DashedBorderPainter extends CustomPainter {
     final paint =
         Paint()
           ..color = AppTheme.customCyan2
-          ..strokeWidth = 1.5
+          ..strokeWidth = 1.5.w
           ..style = PaintingStyle.stroke;
     const dashWidth = 6.0;
     const dashSpace = 4.0;

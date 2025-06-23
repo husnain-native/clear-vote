@@ -8,6 +8,7 @@ import 'package:clear_vote/features/auth/presentation/widgets/divider_with_text.
 import 'package:clear_vote/features/auth/presentation/widgets/social_button.dart';
 import 'package:clear_vote/features/auth/presentation/widgets/auth_footer_text.dart';
 import 'package:clear_vote/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -27,89 +28,102 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: 100),
-                  Text(
-                    'Sign Up',
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.headlineMedium?.copyWith(
-                      color: AppTheme.customCyan2,
-                      fontWeight: FontWeight.w700,
-                    ),
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 20.h),
+                Text(
+                  'Sign Up',
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    color: AppTheme.customCyan2,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 28.sp.clamp(20, 36),
                   ),
-                  const SizedBox(height: 3),
-                  Text(
-                    'Create your new account',
-                    style: TextStyle(fontSize: 15, color: AppTheme.customGrey),
-                    textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 3.h),
+                Text(
+                  'Create your new account',
+                  style: TextStyle(
+                    fontSize: 15.sp.clamp(12, 20),
+                    color: AppTheme.customGrey,
                   ),
-                  const SizedBox(height: 32),
-                  CustomTextField(
-                    label: 'Email',
-                    hint: 'example@email.com',
-                    controller: emailController,
-                  ),
-                  const SizedBox(height: 16),
-                  CustomTextField(
-                    label: 'Password',
-                    hint: 'Password123.',
-                    controller: passwordController,
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 16),
-                  CustomTextField(
-                    label: 'Confirm Password',
-                    hint: 'Password123.',
-                    controller: confirmPasswordController,
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 16),
-                  CustomCheckbox(
-                    value: agreeTerms,
-                    onChanged: (v) => setState(() => agreeTerms = v),
-                    text: 'By sign up I agree with Terms and Conditions',
-                    linkText: 'Terms and Conditions',
-                    onLinkTap: () {},
-                  ),
-                  CustomCheckbox(
-                    value: agreePrivacy,
-                    onChanged: (v) => setState(() => agreePrivacy = v),
-                    text: 'By sign up I agree with Privacy and Policy',
-                    linkText: 'Privacy and Policy',
-                    onLinkTap: () {},
-                  ),
-                  const SizedBox(height: 16),
-                  CustomButton(text: 'Create New Account', onPressed: () {}),
-                  const SizedBox(height: 26),
-                  const DividerWithText(text: 'Or'),
-                  const SizedBox(height: 26),
-                  SocialButton(text: 'Google', onPressed: () {}),
-                  const SizedBox(height: 94),
-                  AuthFooterText(
-                    text: 'Already have an account? ',
-                    linkText: 'Sign In',
-                    onLinkTap: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => const SignInPage()),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 26.h),
+                CustomTextField(
+                  label: 'Email',
+                  hint: 'example@email.com',
+                  controller: emailController,
+                ),
+                SizedBox(height: 16.h),
+                CustomTextField(
+                  label: 'Password',
+                  hint: 'Password123.',
+                  controller: passwordController,
+                  obscureText: true,
+                ),
+                SizedBox(height: 16.h),
+                CustomTextField(
+                  label: 'Confirm Password',
+                  hint: 'Password123.',
+                  controller: confirmPasswordController,
+                  obscureText: true,
+                ),
+                SizedBox(height: 16.h),
+                CustomCheckbox(
+                  value: agreeTerms,
+                  onChanged: (v) => setState(() => agreeTerms = v),
+                  text: 'By sign up I agree with Terms and Conditions',
+                  linkText: 'Terms and Conditions',
+                  onLinkTap: () {},
+                ),
+                CustomCheckbox(
+                  value: agreePrivacy,
+                  onChanged: (v) => setState(() => agreePrivacy = v),
+                  text: 'By sign up I agree with Privacy and Policy',
+                  linkText: 'Privacy and Policy',
+                  onLinkTap: () {},
+                ),
+                SizedBox(height: 16.h),
+                CustomButton(
+                  text: 'Create New Account',
+                  onPressed: () {
+                    // Navigate to ProfileInformationPage
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const SignInPage(),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 26.h),
+                const DividerWithText(text: 'Or'),
+                SizedBox(height: 26.h),
+                SocialButton(text: 'Google', onPressed: () {}),
+                SizedBox(height: 16.h),
+              ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 60.h, // Explicitly constrain height
+        padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+        child: AuthFooterText(
+          text: 'Already have an account? ',
+          linkText: 'Sign In',
+          onLinkTap: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const SignInPage()),
+            );
+          },
         ),
       ),
     );

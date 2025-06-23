@@ -1,5 +1,6 @@
 import 'package:clear_vote/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum ButtonVariant { primary, secondary, outline }
 
@@ -51,16 +52,16 @@ class CustomButton extends StatelessWidget {
     }
 
     return SizedBox(
-      width: width,
-      height: height,
+      width: width ?? double.infinity,
+      height: height.h.clamp(36, 64),
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppTheme.customCyan2,
           foregroundColor: textColor,
-          padding: padding,
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
+            borderRadius: BorderRadius.circular(16.r),
             side:
                 borderColor != null
                     ? BorderSide(color: borderColor)
@@ -70,8 +71,8 @@ class CustomButton extends StatelessWidget {
         child:
             isLoading
                 ? SizedBox(
-                  height: 20,
-                  width: 20,
+                  height: 20.h,
+                  width: 20.w,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
                     valueColor: AlwaysStoppedAnimation<Color>(textColor),
@@ -82,6 +83,7 @@ class CustomButton extends StatelessWidget {
                   style: theme.textTheme.labelLarge?.copyWith(
                     color: textColor,
                     fontWeight: FontWeight.w600,
+                    fontSize: 16.sp.clamp(13, 22),
                   ),
                 ),
       ),

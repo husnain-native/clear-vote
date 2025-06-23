@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:clear_vote/core/widgets/custom_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:clear_vote/features/auth/presentation/pages/profile_information_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({super.key});
@@ -57,50 +58,50 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       child: Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: 100),
+                SizedBox(height: 100.h),
                 Text(
                   'Verify your Email',
                   textAlign: TextAlign.center,
                   style: theme.textTheme.headlineMedium?.copyWith(
                     color: AppTheme.customCyan2,
-                    fontSize: 34,
+                    fontSize: 34.sp.clamp(22, 45),
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(height: 5),
+                SizedBox(height: 5.h),
                 Text(
                   'We already sent a code to your email jhon@*****.com, please input below to\n confirm your email address',
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.bodyMedium,
+                  style: TextStyle(fontSize: 15.sp.clamp(10, 28)),
                 ),
-                const SizedBox(height: 42),
+                SizedBox(height: 42.h),
                 Text(
                   'Enter Code here:',
                   textAlign: TextAlign.center,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: AppTheme.customCyan2,
-                    fontSize: 14,
+                    fontSize: 14.sp.clamp(10, 18),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(5, (i) {
                     return Container(
-                      width: 48,
-                      height: 48,
-                      margin: EdgeInsets.only(right: i < 4 ? 12 : 0),
+                      width: 48.w,
+                      height: 48.h,
+                      margin: EdgeInsets.only(right: i < 4 ? 12.w : 0),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppTheme.customLightGrey,
-                          width: 1.5,
+                          width: 1.5.w,
                         ),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                         color: Colors.white,
                       ),
                       child: Center(
@@ -110,21 +111,21 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                           textAlign: TextAlign.center,
                           style: theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w600,
-                            color: AppTheme.customBlack,
-                            fontSize: 24,
+                            color: AppTheme.customGrey,
+                            fontSize: 24.sp.clamp(16, 32),
                           ),
                           keyboardType: TextInputType.number,
                           maxLength: 1,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
                           ],
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             border: InputBorder.none,
                             counterText: '',
                             hintText: '-',
                             hintStyle: TextStyle(
                               color: AppTheme.customBlack,
-                              fontSize: 24,
+                              fontSize: 24.sp.clamp(16, 32),
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -140,7 +141,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                     );
                   }),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
                 CustomButton(
                   text: 'Confirm',
                   onPressed: () {
@@ -160,13 +161,13 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                     });
                   },
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Expire in: 00:${secondsLeft.toString().padLeft(2, '0')}',
-                      style: theme.textTheme.bodySmall,
+                      style: TextStyle(fontSize: 14.sp.clamp(10, 24)),
                     ),
                     GestureDetector(
                       onTap:
@@ -179,7 +180,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                       child: Text(
                         'Resend code',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          fontSize: 14,
+                          fontSize: 14.sp.clamp(10, 24),
                           fontWeight: FontWeight.w600,
                           color: AppTheme.customBlack,
                         ),
@@ -208,26 +209,26 @@ class SuccessfullyVerifiedPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.verified, color: AppTheme.customCyan2, size: 100),
-              const SizedBox(height: 32),
+              Icon(Icons.verified, color: AppTheme.customCyan2, size: 100.w),
+              SizedBox(height: 32.h),
               Text(
                 'Successfully Verified',
                 style: GoogleFonts.epilogue(
                   fontWeight: FontWeight.w600,
-                  fontSize: 34,
+                  fontSize: 34.sp.clamp(22, 40),
                   height: 1.0, // 100%
                   letterSpacing: 0,
                   color: AppTheme.customCyan2,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.h),
               Text(
                 'Your account is set now. we will redirect you to\nprofile information',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: AppTheme.customGrey,
                   fontWeight: FontWeight.w400,
-                  fontSize: 15,
+                  fontSize: 15.sp.clamp(10, 22),
                 ),
                 textAlign: TextAlign.center,
               ),

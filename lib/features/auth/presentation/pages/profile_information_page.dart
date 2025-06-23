@@ -6,6 +6,7 @@ import 'package:clear_vote/core/theme/app_theme.dart';
 import 'package:clear_vote/core/widgets/custom_text_field.dart';
 import 'package:clear_vote/core/widgets/custom_button.dart';
 import 'package:clear_vote/features/auth/presentation/pages/upload_images_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileInformationPage extends StatefulWidget {
   const ProfileInformationPage({super.key});
@@ -54,7 +55,7 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -63,20 +64,20 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
                     GestureDetector(
                       onTap: () => Navigator.of(context).pop(),
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 8),
+                        padding: EdgeInsets.only(top: 16.h, bottom: 8.h),
                         child: Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.arrow_back_ios,
-                              size: 24,
+                              size: 24.w,
                               color: AppTheme.customGrey,
                             ),
-                            const SizedBox(width: 2),
+                            SizedBox(width: 2.w),
                             Text(
                               'Back',
                               style: GoogleFonts.epilogue(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 17,
+                                fontSize: 17.sp.clamp(12, 24),
                                 color: AppTheme.customGrey,
                               ),
                             ),
@@ -86,42 +87,40 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
-                // const SizedBox(height: 32),
+                SizedBox(height: 8.h),
                 Text(
                   'Profile Information',
                   style: GoogleFonts.epilogue(
                     fontWeight: FontWeight.w600,
-                    fontSize: 32,
+                    fontSize: 32.sp.clamp(20, 40),
                     color: AppTheme.customCyan2,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
                 Center(
                   child: Container(
-                    width: 125.93,
-                    height: 136,
+                    width: 125.93.w,
+                    height: 136.h,
                     alignment: Alignment.topCenter,
                     child: Stack(
                       alignment: Alignment.topCenter,
                       clipBehavior: Clip.none,
                       children: [
-                        // Circular Avatar with border
                         Container(
-                          width: 125.93,
-                          height: 125.93,
+                          width: 125.93.w,
+                          height: 125.93.w,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
                               color: AppTheme.customCyan2,
-                              width: 2,
+                              width: 2.w,
                             ),
                           ),
                           child: GestureDetector(
                             onTap: _pickImage,
                             child: CircleAvatar(
-                              radius: 125.93 / 2,
+                              radius: 125.93.w / 2,
                               backgroundColor: AppTheme.customWhite,
                               backgroundImage:
                                   _profileImage != null
@@ -131,32 +130,31 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
                                   _profileImage == null
                                       ? Icon(
                                         Icons.person,
-                                        size: 54,
+                                        size: 54.w,
                                         color: AppTheme.customCyan2,
                                       )
                                       : null,
                             ),
                           ),
                         ),
-                        // Add icon container (overlapping bottom border)
                         Positioned(
-                          bottom: -10, // negative value to overlap
-                          left: (145.93 - 42.75) / 2, // center horizontally
+                          bottom: -10.h,
+                          left: (145.93.w - 42.75.w) / 2,
                           child: Container(
-                            width: 25.75,
-                            height: 24.75,
+                            width: 25.75.w,
+                            height: 24.75.h,
                             decoration: BoxDecoration(
                               color: AppTheme.customCyan2,
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: AppTheme.customCyan2,
-                                width: 2,
+                                width: 2.w,
                               ),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.add,
                               color: Colors.white,
-                              size: 21.75,
+                              size: 19.75.sp.clamp(16, 29),
                             ),
                           ),
                         ),
@@ -164,28 +162,27 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
                 CustomTextField(
                   label: 'Full Name',
                   hint: 'Jhon Doe',
                   controller: _nameController,
                 ),
-                const SizedBox(height: 16),
-                // State Dropdown with label
+                SizedBox(height: 16.h),
                 Text(
                   'State',
                   style: GoogleFonts.epilogue(
                     fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                    fontSize: 15.sp.clamp(10, 22),
                     color: AppTheme.customGrey,
                   ),
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6.h),
                 DropdownButtonFormField<String>(
                   value: _selectedState,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                       borderSide: BorderSide(color: AppTheme.customLightGrey),
                     ),
                   ),
@@ -196,7 +193,9 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
                               value: state,
                               child: Text(
                                 state,
-                                style: GoogleFonts.epilogue(fontSize: 15),
+                                style: GoogleFonts.epilogue(
+                                  fontSize: 15.sp.clamp(10, 22),
+                                ),
                               ),
                             ),
                           )
@@ -208,22 +207,21 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
                     });
                   },
                 ),
-                const SizedBox(height: 16),
-                // City Dropdown with label
+                SizedBox(height: 16.h),
                 Text(
                   'City',
                   style: GoogleFonts.epilogue(
                     fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                    fontSize: 15.sp.clamp(10, 22),
                     color: AppTheme.customGrey,
                   ),
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6.h),
                 DropdownButtonFormField<String>(
                   value: _selectedCity,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                       borderSide: BorderSide(color: AppTheme.customLightGrey),
                     ),
                   ),
@@ -234,7 +232,9 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
                               value: city,
                               child: Text(
                                 city,
-                                style: GoogleFonts.epilogue(fontSize: 15),
+                                style: GoogleFonts.epilogue(
+                                  fontSize: 15.sp.clamp(10, 22),
+                                ),
                               ),
                             ),
                           )
@@ -245,34 +245,34 @@ class _ProfileInformationPageState extends State<ProfileInformationPage> {
                     });
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 CustomTextField(
                   label: 'Address',
                   hint: 'Great street 01',
                   controller: _addressController,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 CustomTextField(
                   label: 'Phone Number',
                   hint: '+1',
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                 ),
-                const SizedBox(height: 32),
-                CustomButton(
-                  text: 'Next',
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => const UploadImagesPage(),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 24),
+                SizedBox(height: 32.h),
               ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+        child: CustomButton(
+          text: 'Next',
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const UploadImagesPage()));
+          },
         ),
       ),
     );

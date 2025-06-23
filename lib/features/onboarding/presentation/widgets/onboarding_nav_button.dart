@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clear_vote/core/theme/app_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingNavButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -10,7 +11,7 @@ class OnboardingNavButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 48,
+      height: 48.h.clamp(36, 64),
       child: Stack(
         children: [
           // Back arrow on the left
@@ -20,13 +21,17 @@ class OnboardingNavButton extends StatelessWidget {
               child: GestureDetector(
                 onTap: onBackTap,
                 child: Container(
-                  width: 48,
-                  height: 48,
+                  width: 48.w.clamp(36, 64),
+                  height: 48.h.clamp(36, 64),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    // color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.arrow_back, color: AppTheme.customCyan2, size: 28),
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: AppTheme.customCyan2,
+                    size: 28.sp.clamp(20, 40),
+                  ),
                 ),
               ),
             ),
@@ -36,13 +41,17 @@ class OnboardingNavButton extends StatelessWidget {
             child: GestureDetector(
               onTap: onTap,
               child: Container(
-                width: 48,
-                height: 48,
+                width: 48.w.clamp(36, 64),
+                height: 48.h.clamp(36, 64),
                 decoration: BoxDecoration(
                   color: AppTheme.customCyan2,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.arrow_forward, color: Colors.white),
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                  size: 28.sp.clamp(20, 40),
+                ),
               ),
             ),
           ),

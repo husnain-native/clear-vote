@@ -8,6 +8,7 @@ import 'package:clear_vote/features/auth/presentation/widgets/social_button.dart
 import 'package:clear_vote/features/auth/presentation/widgets/auth_footer_text.dart';
 import 'package:clear_vote/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:clear_vote/features/auth/presentation/pages/verify_email_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -34,39 +35,42 @@ class _SignInPageState extends State<SignInPage> {
             children: [
               SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const SizedBox(height: 100),
+                      SizedBox(height: 20.h),
                       Text(
                         'Welcome Back',
                         textAlign: TextAlign.center,
                         style: theme.textTheme.headlineMedium?.copyWith(
                           color: AppTheme.customCyan2,
                           fontWeight: FontWeight.w700,
+                          fontSize: 28.sp.clamp(20, 36),
                         ),
                       ),
-                      const SizedBox(height: 3),
+                      SizedBox(height: 3.h),
                       Text(
                         'Sign in to continue',
                         textAlign: TextAlign.center,
-                        style: theme.textTheme.bodyLarge,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontSize: 15.sp.clamp(12, 20),
+                        ),
                       ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: 32.h),
                       CustomTextField(
                         label: 'Email',
                         hint: 'example@email.com',
                         controller: emailController,
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
                       CustomTextField(
                         label: 'Password',
                         hint: 'Password123.',
                         controller: passwordController,
                         obscureText: true,
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -77,15 +81,16 @@ class _SignInPageState extends State<SignInPage> {
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: colorScheme.primary,
                                 fontWeight: FontWeight.w500,
+                                fontSize: 13.sp.clamp(10, 16),
                               ),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
+                      SizedBox(height: 64.h),
                       CustomButton(
                         text: 'Login',
-                        isLoading: isLoading,
                         onPressed: () {
                           setState(() => isLoading = true);
                           // Simulate loading
@@ -99,61 +104,49 @@ class _SignInPageState extends State<SignInPage> {
                           });
                         },
                       ),
-                      const SizedBox(height: 26),
+
+                      SizedBox(height: 26.h),
                       const DividerWithText(text: 'Or'),
-                      const SizedBox(height: 26),
+                      SizedBox(height: 26.h),
                       SocialButton(text: 'Google', onPressed: () {}),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12.h),
                       SocialButton(text: 'Apple', onPressed: () {}),
-                      const SizedBox(height: 168),
-                      AuthFooterText(
-                        text: "Don't have an account? ",
-                        linkText: 'Sign Up',
-                        onLinkTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (_) => const SignUpPage(),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 16),
+                     
                     ],
                   ),
                 ),
               ),
               if (isLoading)
                 Container(
-                  color: Colors.black.withValues(alpha: 0.5),
+                  color: Colors.black.withOpacity(0.5),
                   child: Center(
                     child: Container(
-                      width: 181.44,
-                      height: 181.44,
-                      padding: const EdgeInsets.fromLTRB(
-                        13.34,
-                        21.35,
-                        13.34,
-                        21.35,
+                      width: 181.44.w,
+                      height: 181.44.h,
+                      padding: EdgeInsets.fromLTRB(
+                        13.34.w,
+                        21.35.h,
+                        13.34.w,
+                        21.35.h,
                       ),
                       decoration: BoxDecoration(
-                        // color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.67),
+                        borderRadius: BorderRadius.circular(10.67.r),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          CircularProgressIndicator(
+                        children: [
+                          const CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation<Color>(
                               Colors.white,
                             ),
                           ),
-                          SizedBox(height: 13.34),
+                          SizedBox(height: 13.34.h),
                           Text(
                             'Logging in',
                             style: TextStyle(
                               fontWeight: FontWeight.w900,
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 18.sp.clamp(14, 24),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                             ),
                           ),
                         ],
@@ -164,6 +157,19 @@ class _SignInPageState extends State<SignInPage> {
             ],
           ),
         ),
+        bottomNavigationBar: Container(
+        height: 60.h, // Explicitly constrain height
+        padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+        child: AuthFooterText(
+          text: 'Don\'t have an account? ',
+          linkText: 'Sign Up',
+          onLinkTap: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const SignUpPage()),
+            );
+          },
+        ),
+      ),
       ),
     );
   }

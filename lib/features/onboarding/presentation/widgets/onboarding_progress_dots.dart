@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clear_vote/core/theme/app_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingProgressDots extends StatelessWidget {
   final int currentIndex;
@@ -17,14 +18,17 @@ class OnboardingProgressDots extends StatelessWidget {
       children: List.generate(count, (index) {
         final isActive = index == currentIndex;
         return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          width: isActive ? 28 :9,
-          height:9,
+          margin: EdgeInsets.symmetric(horizontal: 4.w),
+          width: isActive ? 28.w.clamp(16, 40) : 9.w.clamp(6, 18),
+          height: 9.h.clamp(6, 18),
           decoration:
               isActive
                   ? BoxDecoration(
                     color: AppTheme.customCyan2,
-                    borderRadius: BorderRadius.horizontal(left: Radius.circular(8), right: Radius.circular(8)),
+                    borderRadius: BorderRadius.horizontal(
+                      left: Radius.circular(8.r.clamp(4, 16)),
+                      right: Radius.circular(8.r.clamp(4, 16)),
+                    ),
                   )
                   : BoxDecoration(
                     color: Colors.grey[300],
